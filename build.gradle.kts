@@ -5,7 +5,7 @@ val ktorVersion = "3.3.1"
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    application
 }
 
 group = "net.tmpa.mcp.learn"
@@ -26,4 +26,26 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "MainKt"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+}
+
+kotlin {
+    jvmToolchain(24)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(24))
+    }
 }
