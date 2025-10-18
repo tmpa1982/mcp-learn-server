@@ -37,7 +37,10 @@ fun runMCPServer() {
             version = "1.0.0" // Version of the implementation
         ),
         ServerOptions(
-            capabilities = ServerCapabilities(tools = ServerCapabilities.Tools(listChanged = true))
+            capabilities = ServerCapabilities(
+                logging = null,
+                tools = ServerCapabilities.Tools(listChanged = true),
+            )
         )
     )
 
