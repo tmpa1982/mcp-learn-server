@@ -1,10 +1,14 @@
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
+@Serializable
 data class Forecast(
     val properties: Properties
 ) {
+    @Serializable
     data class Properties(val periods: List<Period>)
 
+    @Serializable
     data class Period(
         val number: Int,
         val name: String,
